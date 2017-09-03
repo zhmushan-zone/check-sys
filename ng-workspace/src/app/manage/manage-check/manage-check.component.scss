@@ -1,0 +1,7 @@
+:host ::ng-deep .ant-table-wrapper {
+    margin-top: 24px;
+}
+
+:host ::ng-deep .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+    text-align: center;
+}
