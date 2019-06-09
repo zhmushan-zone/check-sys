@@ -1,0 +1,49 @@
+<form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzPrefixIcon="anticon anticon-user">
+        <input formControlName="username" nz-input placeholder="Username">
+      </nz-input-group>
+      <nz-form-explain *ngIf="validateForm.get('username').dirty && validateForm.get('username').errors">Please input your username!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzPrefixIcon="anticon anticon-lock">
+        <input formControlName="password" nz-input type="password" placeholder="Password">
+      </nz-input-group>
+      <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">Please input your Password!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid">Register</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<nz-table #filterTable [nzData]="users" [nzPageSize]="2">
+  <thead>
+    <tr>
+      <th>姓名</th>
+      <th nzShowSort (nzValueChange)="usersSortChange($event, 'publicTime')"> 签到/次</th>
+      <th nzShowSort (nzValueChange)="usersSortChange($event, 'publicTime')"> 迟到/次</th>
+      <th nzShowSort (nzValueChange)="usersSortChange($event, 'publicTime')"> 私假/次</th>
+      <th nzShowSort (nzValueChange)="usersSortChange($event, 'publicTime')"> 公假/次</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of filterTable.data;let i=index">
+      <td>{{data.username}}</td>
+      <td>{{data.totalTime}}</td>
+      <td>{{data.lateTime}}</td>
+      <td>{{data.privateTime}}</td>
+      <td>{{data.publicTime}}</td>
+      <td>
+        <button nz-button nzType="'danger'" nzSize="'small'" (click)="showDelete(data)">
+          <span>删除</span>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

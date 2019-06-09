@@ -1,0 +1,33 @@
+{
+  "name": "check-sys",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "jsonwebtoken": "^8.2.0",
+    "koa": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-jwt": "^2.2.4",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.3",
+    "koa2-cors": "^2.0.3",
+    "mongoose": "^5.0.10",
+    "node-schedule": "^1.2.4"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^7.2.6",
+    "@types/koa": "^2.0.44",
+    "@types/koa-bodyparser": "^4.2.0",
+    "@types/koa-router": "^7.0.27",
+    "@types/koa-static": "^4.0.0",
+    "@types/mongoose": "^5.0.7",
+    "@types/node-schedule": "^1.2.0",
+    "tslint": "^5.10.0",
+    "typescript": "^2.8.3"
+  },
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "build": "tsc"
+  },
+  "author": "木杉",
+  "license": "MIT"
+}

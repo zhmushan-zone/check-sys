@@ -1,0 +1,40 @@
+<nz-date-picker [(ngModel)]="_date" (ngModelChange)="onChange($event)"></nz-date-picker>
+<button nz-button [nzType]="'primary'" (click)="selectTime()">
+  <span>确认</span>
+</button>
+<nz-table #nzTable [nzData]="users">
+  <thead>
+    <tr>
+      <th><span>姓名</span></th>
+      <th><span>状态</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of nzTable.data;let i=index">
+      <td>{{data.username}}</td>
+      <td>
+        <a *ngIf="data.checkStatus === -2" (click)="changeModal(i)" class="private-leave">私假</a>
+        <a *ngIf="data.checkStatus === -1" (click)="changeModal(i)" class="late">迟到</a>
+        <a *ngIf="data.checkStatus === 0" (click)="changeModal(i)" class="public-leave">公假</a>
+        <a *ngIf="data.checkStatus === 1" (click)="changeModal(i)" class="on-time">已签到</a>
+        <a *ngIf="data.checkStatus === 10" (click)="changeModal(i)" class="private-leave">未签到</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<nz-modal [(nzVisible)]="changeIsVisible" nzTitle="签到修改" (nzOnCancel)="handleChangeCancel($event)" (nzOnOk)="handleChangeOk($event)">
+    <nz-radio-group [(ngModel)]="radioValue">
+        <label nz-radio-button [nzValue]="1">
+        <span>已签到</span>
+    </label>
+        <label nz-radio-button [nzValue]="-1">
+        <span>迟到</span>
+    </label>
+        <label nz-radio-button [nzValue]="0">
+        <span>公假</span>
+    </label>
+        <label nz-radio-button [nzValue]="-2">
+        <span>私假</span>
+    </label>
+    </nz-radio-group>
+</nz-modal>

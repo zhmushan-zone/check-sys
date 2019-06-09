@@ -1,5 +1,27 @@
-ng-workspace/dist
-**/node_modules
-ng-workspace/e2e/*.js
-ng-workspace/e2e/*.map
-node-workspace/build
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# dependencies
+node_modules/
+
+
+# production
+build/
+dist/
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+server/static/

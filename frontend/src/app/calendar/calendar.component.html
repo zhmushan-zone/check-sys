@@ -1,0 +1,82 @@
+<nz-layout class="layout">
+  <nz-content class="content">
+    <nz-layout style="background: #fff">
+      <nz-sider [nzWidth]="360" style="background:#fff">
+        <ul nz-menu [nzMode]="'inline'" style="width: 240px;border:none;">
+          <nz-card class="info-card">
+            <button nz-button [nzType]="'primary'" [nzSize]="'large'" class="info-btn" [disabled]="isDisabled" (click)="check()">
+              <span>立即签到</span>
+            </button>
+            <button nz-button [nzType]="'danger'" [nzSize]="'large'" (click)="showApplyModal()" class="info-btn" [disabled]="baseInfo.role!==0"
+              style="margin:18px 0px;">
+              <span>申请私假</span>
+            </button>
+            <nz-modal [(nzVisible)]="applyPrivateIsVisible" nzTitle="申请私假" (nzOnCancel)="applyHandleCancel($event)"
+              (nzOnOk)="applyHandleOk($event)">
+              <nz-date-picker [(ngModel)]="_date"></nz-date-picker>
+            </nz-modal>
+            <p>每日签到时间:</p>
+            <p>周六：早上 08:00-08:30</p>
+            <p>周日~周五：每天 17:30-18:00</p>
+            <p>忘记签到，联系在场大二学长学姐</p>
+          </nz-card>
+          <nz-card class="info-card">
+            <p>
+              <i class="anticon anticon-idcard"></i>
+              <span style="font-weight:bold">{{ username }}</span>
+            </p>
+            <p>已请私假次数 :
+              <span class="private-leave">{{ baseInfo.privateTime }}</span>次</p>
+            <p>已请公假次数 :
+              <span class="public-leave">{{ baseInfo.publicTime }}</span>次</p>
+            <p>已迟到次数 :
+              <span class="late">{{ baseInfo.lateTime }}</span>次</p>
+            <p>已签到天数 :
+              <span class="on-time">{{ baseInfo.totalTime }}</span>天</p>
+            <p>一学期共三次私假，三次迟到</p>
+          </nz-card>
+        </ul>
+      </nz-sider>
+      <nz-content>
+        <button nz-button [nzType]="'primary'" class="ranking" (click)="showRanking()">
+          <span>签到排行榜</span>
+        </button>
+        <nz-modal [(nzVisible)]="rankingIsVisible" nzTitle="签到排行榜" [nzContent]="rankingContent" (nzOnCancel)="rankingHandleCancel($event)"
+          (nzOnOk)="rankingHandleOk($event)">
+          <ng-template #rankingContent>
+            <nz-table #nzTable [nzData]="rank" [nzPageSize]="10">
+              <thead>
+                <tr>
+                  <th>
+                    <span>排名</span>
+                  </th>
+                  <th>
+                    <span>姓名</span>
+                  </th>
+                  <th>
+                    <span>分数</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let val of nzTable.data;let i=index">
+                  <td>{{i + 1}}</td>
+                  <td>{{val.username}}</td>
+                  <td>{{val.score}}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </ng-template>
+        </nz-modal>
+        <nz-calendar [(ngModel)]="_date" [(nzMode)]="mode" [nzDateCell]="dateCellTpl">
+        </nz-calendar>
+        <ng-template #dateCellTpl let-date>
+          <nz-badge *ngIf="baseInfo.calendar[date | date:'yyyy-MM-dd']===-2" class="anticon anticon-close cal-private-leave"></nz-badge>
+          <nz-badge *ngIf="baseInfo.calendar[date | date:'yyyy-MM-dd']===1" class="anticon anticon-check cal-on-time"></nz-badge>
+          <nz-badge *ngIf="baseInfo.calendar[date | date:'yyyy-MM-dd']===0" class="anticon anticon-check cal-public-leave"></nz-badge>
+          <nz-badge *ngIf="baseInfo.calendar[date | date:'yyyy-MM-dd']===-1" class="anticon anticon-exclamation cal-late"></nz-badge>
+        </ng-template>
+      </nz-content>
+    </nz-layout>
+  </nz-content>
+</nz-layout>

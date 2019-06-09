@@ -1,0 +1,31 @@
+<nz-layout>
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed">
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+      <li nz-menu-item routerLink="user" routerLinkActive="ant-menu-item-selected">
+        <span title>
+          <i class="anticon anticon-user"></i>
+          <span class="nav-text">用户管理</span>
+        </span>
+      </li>
+      <li nz-menu-item routerLink="check" routerLinkActive="ant-menu-item-selected">
+        <span title>
+          <i class="anticon anticon-check-square-o"></i>
+          <span class="nav-text">签到管理</span>
+        </span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header style="background: #fff; padding:0;">
+      <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
+    </nz-header>
+    <nz-content style="margin:0 16px;">
+      <nz-breadcrumb style="margin:16px 0;">
+      </nz-breadcrumb>
+      <div style="padding:24px; background: #fff; min-height: 360px;">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer style="text-align: center;"></nz-footer>
+  </nz-layout>
+</nz-layout>
